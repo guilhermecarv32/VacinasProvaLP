@@ -1,0 +1,77 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class VacinaUtil {
+
+	public static void main(String[] args) {
+		final int MAX = 6;
+		int criancas = 1500;
+		Scanner scanner = new Scanner(System.in);
+		List<Vacina> lista = new ArrayList<Vacina>();
+		
+		for(int i = 1; i <= MAX; i++) {
+			System.out.println("Digite o nome da " + i + "ª Vacina: ");
+			String nome = scanner.nextLine();
+			System.out.println("Doenças que ela imuniza: ");
+			String doencas = scanner.nextLine();
+			scanner.nextLine();
+			System.out.println("Quantidade de doses INICIAIS: ");
+			int dosesIniciais = scanner.nextInt();
+			System.out.println("Quantidade de doses DE REFORÇO: ");
+			int dosesReforco = scanner.nextInt();
+			System.out.println("A partir de quantos meses a criança pode se vacinar: ");
+			int meses = scanner.nextInt();
+			
+			lista.add(new Vacina(nome, doencas, dosesIniciais, dosesReforco, meses));
+		}
+		
+		int op = 0;
+		
+		do {
+			System.out.println("Qual operação deseja realizar(1-4): ");
+			System.out.println();
+			System.out.println("**************************MENU************************** ");
+			System.out.println("** 1 - Conclir ciclo de aplicação (selecionar vacina) ** ");
+			System.out.println("** 2 - Percentual de vacina (selecionar vacina)       ** ");
+			System.out.println("** 3 - Vacina com mais doses previstas                ** ");
+			System.out.println("** 4 - Encerrar                                       ** ");
+			System.out.println("******************************************************** ");
+			op = scanner.nextInt();
+			
+			switch(op) {
+			case 1:
+				System.out.println("Digite o Indice da vacina(0-5)");
+				int indiceVacina = scanner.nextInt();
+				lista.get(indiceVacina).adicionarConclusaoImunizacao();
+				
+				break;
+			
+			case 2:
+				int totalImunizacoes = 0;
+				for(int i=0; i < 6; i++) {
+					totalImunizacoes += lista.get(i).getImunizacoesCompletas();	
+					System.out.println(lista.get(i).getNome() + "com " + (totalImunizacoes/15) + "% de crianças imunizadas");
+				}
+				
+				break;
+				
+			case 3:
+				
+				int totalDosesMaior = 0;
+				String nomeMaior = "";
+				for(int i = 0; i < 6; i++) {
+					if(lista.get(i).getTotalDoses() > totalDosesMaior) {
+						totalDosesMaior = lista.get(i).getTotalDoses();
+						nomeMaior = lista.get(i).getNome();
+					}				
+				}
+				System.out.println("Vacina com mais doses previstas: " + nomeMaior + " com " + totalDosesMaior + " doses.");
+				
+			}
+				
+		}while (op != 4);
+		
+	}
+
+}
