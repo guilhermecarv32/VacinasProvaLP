@@ -1,0 +1,50 @@
+public class Vacina {
+
+	private String nome;				
+	private String doencas;				
+	private int dosesIniciais;			
+	private int dosesReforco;			
+	private int meses;					
+	private int imunizacoesCompletas;	
+	
+	public Vacina(String nome, String doencas, int dosesIniciais, int dosesReforco, int meses) {
+		this.nome = nome;
+		this.doencas = doencas;
+		this.dosesIniciais = dosesIniciais;
+		this.dosesReforco = dosesReforco;
+		this.meses = meses;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getDoencas() {
+		return doencas;
+	}
+
+	public int getDosesIniciais() {
+		return dosesIniciais;
+	}
+
+	public int getDosesReforco() {
+		return dosesReforco;
+	}
+
+	public int getMeses() {
+		return meses;
+	}
+
+	public int getImunizacoesCompletas() {
+		return imunizacoesCompletas;
+	}
+
+	public void adicionarConclusaoImunizacao() {
+		imunizacoesCompletas++;
+	}
+	
+	public int getTotalDoses() {
+		return dosesIniciais + dosesReforco;
+	}
+	
+}
